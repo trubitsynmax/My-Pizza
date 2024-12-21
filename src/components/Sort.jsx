@@ -1,4 +1,9 @@
-export function Sort() {
+import { useState } from "react";
+
+export function Sort({ isOpen, setIsOpen }) {
+  const nameCategory = ["популярности", "цене", "алфавиту"];
+  const [select, isSelect] = useState(0);
+
   return (
     <div className="sort">
       <div className="sort__label">
@@ -15,15 +20,19 @@ export function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span>популярности</span>
+        <span onClick={() => setIsOpen(!isOpen)}>{nameCategory[select]}</span>
       </div>
-      <div className="sort__popup">
-        <ul>
-          <li className="active">популярности</li>
-          <li>цене</li>
-          <li>алфавиту</li>
-        </ul>
-      </div>
+      {isOpen && (
+        <div className="sort__popup">
+          <ul>
+            {nameCategory.map((item, index) => (
+              <li key={index} onClick={() => isSelect(index)}>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

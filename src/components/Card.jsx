@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function Card({ name, price, sizes, types, imageUrl }) {
+export function Card({ name, price, sizes, types, imageUrl, id }) {
   const [type, setType] = useState(null);
   const [sizePizza, setSizePizza] = useState(null);
   const typesNames = ["тонкое", "традиционное"];
@@ -14,6 +14,7 @@ export function Card({ name, price, sizes, types, imageUrl }) {
           {types.map((item) => (
             <li
               className={type == item ? "active" : ""}
+              key={item}
               onClick={() => setType(item)}
             >
               {typesNames[item]}
@@ -24,6 +25,7 @@ export function Card({ name, price, sizes, types, imageUrl }) {
           {sizes.map((item, index) => (
             <li
               className={sizePizza == index ? "active" : ""}
+              key={item}
               onClick={() => setSizePizza(index)}
             >
               {item} см
