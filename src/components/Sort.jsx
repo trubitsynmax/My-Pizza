@@ -3,7 +3,10 @@ import { useState } from "react";
 export function Sort({ isOpen, setIsOpen }) {
   const nameCategory = ["популярности", "цене", "алфавиту"];
   const [select, isSelect] = useState(0);
-
+  const handleClick = (index) => {
+    isSelect(index);
+    setIsOpen(false);
+  };
   return (
     <div className="sort">
       <div className="sort__label">
@@ -26,7 +29,7 @@ export function Sort({ isOpen, setIsOpen }) {
         <div className="sort__popup">
           <ul>
             {nameCategory.map((item, index) => (
-              <li key={index} onClick={() => isSelect(index)}>
+              <li key={index} onClick={() => handleClick(index)}>
                 {item}
               </li>
             ))}

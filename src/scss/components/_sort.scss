@@ -5,7 +5,9 @@
   &__label {
     display: flex;
     align-items: center;
-
+    @media (max-width: 1285px) {
+      margin: 0 0 10px 0;
+    }
     svg {
       margin-right: 8px;
     }
@@ -31,7 +33,10 @@
     overflow: hidden;
     padding: 10px 0;
     width: 160px;
-
+    @media (max-width: 750px) {
+      top: 20px;
+      left: 150px;
+    }
     ul {
       overflow: hidden;
       li {

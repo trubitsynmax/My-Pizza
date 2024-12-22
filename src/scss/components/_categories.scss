@@ -1,6 +1,7 @@
 @import "../variables";
 
 .categories {
+  position: relative;
   ul {
     display: flex;
 
@@ -25,6 +26,28 @@
       &.active {
         background-color: #282828;
         color: #fff;
+      }
+      @media (max-width: 935px) {
+        padding: 7px 13px;
+        border-readius: 25px;
+        margin-right: 8px;
+      }
+    }
+    @media (max-width: 750px) {
+      display: none;
+      position: absolute;
+      z-index: 2;
+      background-color: #fff;
+      padding: 5px;
+      border-radius: 5px;
+      top: 32px;
+      left: 100px;
+      &.active {
+        display: block;
+      }
+      li {
+        margin-bottom: 10px;
+        border-radius: 0px;
       }
     }
   }

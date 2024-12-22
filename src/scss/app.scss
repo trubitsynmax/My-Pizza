@@ -308,3 +308,31 @@ body {
     }
   }
 }
+
+@media (max-width: 1285px) {
+  .content {
+    &__top {
+      flex-direction: column-reverse;
+    }
+  }
+}
+@media (max-width: 750px) {
+  .content {
+    &__top {
+      display: block;
+    }
+  }
+}
+@media (max-width: 800px) {
+  .content {
+    &__items {
+      justify-content: center;
+    }
+  }
+}
+@media (max-width: 520px) {
+  .wrapper {
+    width: calc(100vw - 20px);
+    margin: 10px auto;
+  }
+}

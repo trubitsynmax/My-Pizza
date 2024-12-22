@@ -8,11 +8,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media (max-width: 614px) {
+      justify-content: center;
+    }
   }
 
   &__logo {
     display: flex;
-
     img {
       margin-right: 15px;
     }
@@ -27,6 +29,22 @@
 
     p {
       color: #7b7b7b;
+      max-width: 250px;
+    }
+    @media (max-width: 614px) {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      img {
+        margin: 0 0 10px 0;
+      }
+      p {
+        margin: 0 15px 0 0;
+        text-align: center;
+      }
+      h1 {
+        text-align: center;
+      }
     }
   }
 }

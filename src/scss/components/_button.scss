@@ -6,6 +6,7 @@
   border-radius: 30px;
   padding: 10px 20px;
   min-width: 100px;
+  margin: 0 auto;
   text-align: center;
   cursor: pointer;
   transition: background-color $duration ease-in-out,
@@ -144,6 +145,11 @@
     span {
       font-weight: 600;
       font-size: 16px;
+    }
+    @media (max-width: 614px) {
+      position: fixed;
+      right: 10px;
+      bottom: 10px;
     }
   }
 }
