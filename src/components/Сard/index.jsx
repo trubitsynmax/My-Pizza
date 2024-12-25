@@ -4,7 +4,6 @@ export function Card({ name, price, sizes, types, imageUrl, id }) {
   const [type, setType] = useState(null);
   const [sizePizza, setSizePizza] = useState(null);
   const typesNames = ["тонкое", "традиционное"];
-
   return (
     <div className="pizza-block">
       <img className="pizza-block__image" src={imageUrl} alt="Pizza" />

@@ -1,18 +1,17 @@
 import { useState } from "react";
 
-export function Categories() {
+export function Categories({ value, onChangeCategory }) {
   const categories = [
-    "Все",
-    "Мясные",
-    "Вегетарианская",
-    "Гриль",
-    "Острые",
-    "Закрытые",
+    { name: "Все", id: 0 },
+    { name: "Мясные", id: 1 },
+    { name: "Вегетарианская", id: 2 },
+    { name: "Гриль", id: 3 },
+    { name: "Острые", id: 4 },
+    { name: "Закрытые", id: 5 },
   ];
-  const [selectCategory, setSelectCategory] = useState(0);
   const [openCategories, setOpenCategories] = useState(false);
   const handleClick = (index) => {
-    setSelectCategory(index);
+    onChangeCategory(index);
     setOpenCategories(false);
   };
   const widthWindow = window.innerWidth;
@@ -21,21 +20,9 @@ export function Categories() {
     <div className="categories">
       {widthWindow <= 750 && (
         <div className="sort__label">
-          <svg
-            width="10"
-            height="6"
-            viewBox="0 0 10 6"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M10 5C10 5.16927 9.93815 5.31576 9.81445 5.43945C9.69075 5.56315 9.54427 5.625 9.375 5.625H0.625C0.455729 5.625 0.309245 5.56315 0.185547 5.43945C0.061849 5.31576 0 5.16927 0 5C0 4.83073 0.061849 4.68424 0.185547 4.56055L4.56055 0.185547C4.68424 0.061849 4.83073 0 5 0C5.16927 0 5.31576 0.061849 5.43945 0.185547L9.81445 4.56055C9.93815 4.68424 10 4.83073 10 5Z"
-              fill="#2C2C2C"
-            />
-          </svg>
           <b>Категории пицц:</b>
           <span onClick={() => setOpenCategories(!openCategories)}>
-            {categories[selectCategory]}
+            {categories[value].name}
           </span>
         </div>
       )}
@@ -43,10 +30,10 @@ export function Categories() {
         {categories.map((item, index) => (
           <li
             onClick={() => handleClick(index)}
-            key={index}
-            className={selectCategory === index ? "active" : null}
+            key={item.id}
+            className={value === index ? "active" : null}
           >
-            {item}
+            {item.name}
           </li>
         ))}
       </ul>

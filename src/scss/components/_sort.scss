@@ -22,7 +22,60 @@
       cursor: pointer;
     }
   }
-
+  &__arrow {
+    cursor: pointer;
+    display: flex;
+    width: 20px;
+    height: 25px;
+    margin-right: 25px;
+    overflow: hidden;
+    transition: 300ms transform ease 0s;
+    position: relative;
+    @media (max-width: 750px) {
+      margin-right: 10px;
+    }
+    &:before {
+      content: "";
+      position: absolute;
+      height: 25px;
+      width: 0.5px;
+      background-color: #000;
+      top: 0;
+      left: 50%;
+      transform: translate(-54%, 0);
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      height: 15px;
+      width: 1px;
+      background-color: #000;
+      top: -4px;
+      left: 6px;
+      transform: rotate(45deg);
+    }
+    &.active {
+      transform: rotate(180deg);
+    }
+    span {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-bottom: 0;
+      &:before {
+        content: "";
+        position: absolute;
+        height: 15px;
+        width: 1px;
+        background-color: #000;
+        top: -3px;
+        right: 5px;
+        transform: rotate(-45deg);
+      }
+    }
+    svg {
+    }
+  }
   &__popup {
     position: absolute;
     right: 0;

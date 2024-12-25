@@ -26,6 +26,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    gap: 5px;
   }
 
   &__top {
@@ -309,7 +310,7 @@ body {
   }
 }
 
-@media (max-width: 1285px) {
+@media (max-width: 1315px) {
   .content {
     &__top {
       flex-direction: column-reverse;
