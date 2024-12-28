@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card, Categories, Skeleton, Sort } from "../components/script";
 
-export default function Home() {
+export default function Home({ usersValue }) {
   const [selectCategory, setSelectCategory] = useState(0);
   const [selectCart, setSelectCart] = useState({
     name: "популярности",
@@ -27,6 +27,19 @@ export default function Home() {
       })
       .catch((e) => setError(true));
   }, [selectCategory, selectCart, MoreOrLess]);
+
+  const skeleton = [...new Array(6)].map((_, index) => (
+    <Skeleton key={index} />
+  ));
+
+  const listPizza = data
+    .filter((item) => {
+      if (item.name.toLowerCase().includes(usersValue.toLowerCase())) {
+        return true;
+      }
+      return false;
+    })
+    .map((item, index) => <Card key={index} {...item} />);
 
   return (
     <>
@@ -54,9 +67,7 @@ export default function Home() {
               позже 😟
             </div>
           )}
-          {isLoading
-            ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
-            : data.map((item, index) => <Card key={index} {...item} />)}
+          {isLoading ? skeleton : listPizza}
         </div>
       </div>
     </>
