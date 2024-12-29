@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import logo from "../assets/img/pizza-logo.svg";
 import Input from "./Input/Input";
 
-export function Header({ usersValue, setUsersValue }) {
+export function Header() {
   return (
     <div className="header">
       <div className="container">
@@ -52,7 +52,7 @@ export function Header({ usersValue, setUsersValue }) {
           </Link>
         </div>
       </div>
-      <Input usersValue={usersValue} setUsersValue={setUsersValue} />
+      <Input />
     </div>
   );
 }

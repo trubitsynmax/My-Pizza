@@ -1,5 +1,9 @@
+import { useContext } from "react";
 import styles from "./Input.module.scss";
-export default function Input({ usersValue, setUsersValue }) {
+import { searchContext } from "../../App";
+
+export default function Input() {
+  const { usersValue, setUsersValue } = useContext(searchContext);
   return (
     <div className={styles.root}>
       <input

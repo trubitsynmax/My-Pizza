@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Card, Categories, Skeleton, Sort } from "../components/script";
+import { searchContext } from "../App";
 
-export default function Home({ usersValue }) {
+export default function Home() {
   const [selectCategory, setSelectCategory] = useState(0);
+  const { usersValue } = useContext(searchContext);
   const [selectCart, setSelectCart] = useState({
     name: "популярности",
     sortProperty: "rating",
