@@ -1,22 +1,29 @@
 import { useContext, useEffect, useState } from "react";
 import { Card, Categories, Skeleton, Sort } from "../components/script";
 import { searchContext } from "../App";
+import { useSelector, useDispatch } from "react-redux";
+import { setFilter, setSort } from "../redux/slices/filterSlice";
 
 export default function Home() {
-  const [selectCategory, setSelectCategory] = useState(0);
+  const dispatch = useDispatch();
+  const filter = useSelector((state) => state.filter.categoryId);
+  const sort = useSelector((state) => state.filter.sort);
+  const onChangeCategory = (id) => {
+    dispatch(setFilter(id));
+  };
+  const onChangeCart = (id) => {
+    dispatch(setSort(id));
+  };
   const { usersValue } = useContext(searchContext);
-  const [selectCart, setSelectCart] = useState({
-    name: "популярности",
-    sortProperty: "rating",
-  });
+
   const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [MoreOrLess, setMoreOrLess] = useState(true);
-  const isCategory = selectCategory > 0 ? `category=${selectCategory}` : "";
+  const isCategory = filter > 0 ? `category=${filter}` : "";
   const isFilter = MoreOrLess ? "asc" : "desc";
-  const isSort = `sortBy=${selectCart.sortProperty}`;
+  const isSort = `sortBy=${sort.sortProperty}`;
   const isCart = useEffect(() => {
     setIsLoading(true);
     fetch(
@@ -28,7 +35,7 @@ export default function Home() {
         setIsLoading(false);
       })
       .catch((e) => setError(true));
-  }, [selectCategory, selectCart, MoreOrLess]);
+  }, [filter, sort.sortProperty, MoreOrLess]);
 
   const skeleton = [...new Array(6)].map((_, index) => (
     <Skeleton key={index} />
@@ -49,12 +56,12 @@ export default function Home() {
         <div className="content__top">
           <Categories
             isOpen={isOpen}
-            value={selectCategory}
-            onChangeCategory={(id) => setSelectCategory(id)}
+            value={filter}
+            onChangeCategory={onChangeCategory}
           />
           <Sort
-            value={selectCart}
-            onChangeCart={(id) => setSelectCart(id)}
+            value={sort}
+            onChangeCart={onChangeCart}
             isOpen={isOpen}
             setIsOpen={setIsOpen}
             MoreOrLess={MoreOrLess}
