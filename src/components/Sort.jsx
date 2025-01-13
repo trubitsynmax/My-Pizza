@@ -1,28 +1,32 @@
 import { useState } from "react";
+import qs from "qs";
+export const nameCategory = [
+  { name: "популярности", sortProperty: "rating" },
+  { name: "цене", sortProperty: "price" },
+  { name: "алфавиту", sortProperty: "name" },
+];
 
 export function Sort({
   value,
   onChangeCart,
   isOpen,
   setIsOpen,
-  MoreOrLess,
-  setMoreOrLess,
+  valueSort,
+  onChangeValueSort,
 }) {
-  const nameCategory = [
-    { name: "популярности", sortProperty: "rating" },
-    { name: "цене", sortProperty: "price" },
-    { name: "алфавиту", sortProperty: "name" },
-  ];
   const handleClick = (index) => {
     onChangeCart(index);
     setIsOpen(false);
+  };
+  const handleClickValue = (value) => {
+    onChangeValueSort(value);
   };
   return (
     <div className="sort">
       <div className="sort__label">
         <div
-          className={MoreOrLess ? "sort__arrow" : "sort__arrow active"}
-          onClick={() => setMoreOrLess(!MoreOrLess)}
+          className={valueSort ? "sort__arrow" : "sort__arrow active"}
+          onClick={() => handleClickValue(valueSort)}
         >
           <span></span>
         </div>
