@@ -50,7 +50,6 @@ export default function Home() {
       } else {
         params.valueSort = true;
       }
-      console.log(params);
       const sort = nameCategory.find(
         (obj) => obj.sortProperty === params.sortProperty
       );
@@ -92,7 +91,6 @@ export default function Home() {
         valueSort,
       });
       navigate(`?${stringifySearch}`);
-      console.log(stringifySearch);
     }
     firstView.current = true;
   }, [filter, sort.sortProperty, valueSort]);
