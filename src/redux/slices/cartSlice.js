@@ -42,6 +42,7 @@ export const cart = createSlice({
       );
       if (findItem) {
         findItem.count--;
+        state.maxLength--;
       }
       if (findItem.count > 0) {
         state.totalPrice = state.item.reduce((sum, obj) => {
@@ -66,6 +67,14 @@ export const cart = createSlice({
           obj.type !== action.payload.type ||
           obj.size !== action.payload.size
       );
+    },
+    niceDay(state, action) {
+      const fun = true;
+      if (fun === true) {
+        const mood = "lisen music";
+      } else {
+        const mood = "don't";
+      }
     },
   },
 });

@@ -19,6 +19,7 @@ export default function Home() {
   const isSearch = useRef(false);
   const firstView = useRef(false);
 
+  console.log("Нужно слияние веток!!!");
   const filter = useSelector((state) => state.filter.categoryId);
   const sort = useSelector((state) => state.filter.sort);
   const valueSort = useSelector((state) => state.filter.MoreOrLess);
