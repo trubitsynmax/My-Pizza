@@ -8,10 +8,10 @@ import {
   setSearch,
   setValueSort,
 } from "../redux/slices/filterSlice";
-import axios from "axios";
 import qs from "qs";
 import { useNavigate } from "react-router";
 import { nameCategory } from "../components/Sort";
+import { fetchPizzaItems } from "../redux/slices/pizzaSlice";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -19,10 +19,20 @@ export default function Home() {
   const isSearch = useRef(false);
   const firstView = useRef(false);
 
-  console.log("Нужно слияние веток!!!");
+  const getItems = () => {
+    const isCategory = filter > 0 ? `category=${filter}` : "";
+    const isFilter = valueSort ? "asc" : "desc";
+    const isSort = `sortBy=${sort.sortProperty}`;
+
+    dispatch(fetchPizzaItems({ isCategory, isFilter, isSort }));
+  };
+
   const filter = useSelector((state) => state.filter.categoryId);
   const sort = useSelector((state) => state.filter.sort);
   const valueSort = useSelector((state) => state.filter.MoreOrLess);
+  const status = useSelector((state) => state.pizza.status);
+  const data = useSelector((state) => state.pizza.items);
+
   const onChangeCategory = (id) => {
     dispatch(setFilter(id));
   };
@@ -33,15 +43,6 @@ export default function Home() {
     dispatch(setValueSort(value));
   };
   const { usersValue } = useContext(searchContext);
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const isCategory = filter > 0 ? `category=${filter}` : "";
-  const isFilter = valueSort ? "asc" : "desc";
-  const isSort = `sortBy=${sort.sortProperty}`;
 
   useEffect(() => {
     if (window.location.search) {
@@ -65,23 +66,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (!isSearch.current) {
-      setIsLoading(true);
-      setError(false);
-      axios
-        .get(
-          `https://6766d6fd560fbd14f18c43df.mockapi.io/MyPizza?${isCategory}&${isSort}&order=${isFilter}`
-        )
-        .then((res) => {
-          setData(res.data);
-          setIsLoading(false);
-        })
-        .catch(() => {
-          setError(true);
-          setIsLoading(false);
-        });
-    }
-    isSearch.current = false;
+    getItems();
   }, [filter, sort.sortProperty, valueSort]);
 
   useEffect(() => {
@@ -108,35 +93,46 @@ export default function Home() {
       return false;
     })
     .map((item, index) => <Card key={index} {...item} />);
+
   return (
     <>
       <div className="container">
         <div className="content__top">
-          <Categories
-            isOpen={isOpen}
-            value={filter}
-            onChangeCategory={onChangeCategory}
-          />
+          <Categories value={filter} onChangeCategory={onChangeCategory} />
           <Sort
             value={sort}
             onChangeCart={onChangeCart}
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
             valueSort={valueSort}
             onChangeValueSort={onChangeValueSort}
           />
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">
-          {error && (
+          {status === "error" && (
             <div>
               К сожалению, произошла какая ошибка или такой пиццы не существует,
               попробуйте повторить попытку позже 😟
             </div>
           )}
-          {isLoading ? skeleton : listPizza}
+          {status === "pending" ? skeleton : listPizza}
         </div>
       </div>
     </>
   );
 }
+
+// setIsLoading(true);
+// setError(false);
+// axios
+//   .get(
+//     `https://6766d6fd560fbd14f18c43df.mockapi.io/MyPizza?${isCategory}&${isSort}&order=${isFilter}`
+//   )
+//   .then((res) => {
+//     setData(res.data);
+//     setIsLoading(false);
+//   })
+//   .catch(() => {
+//     setError(true);
+//     setIsLoading(false);
+//   });
+// isSearch.current = false;

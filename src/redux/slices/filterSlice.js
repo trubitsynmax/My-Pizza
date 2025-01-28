@@ -7,6 +7,7 @@ const initialState = {
     name: "популярности",
     sortProperty: "rating",
   },
+  isOpen: false,
 };
 
 export const filter = createSlice({
@@ -27,8 +28,12 @@ export const filter = createSlice({
       state.MoreOrLess = action.payload.valueSort;
       state.sort = action.payload.sort;
     },
+    setOpen(state, action) {
+      state.isOpen = action.payload;
+    },
   },
 });
 
-export const { setFilter, setSort, setSearch, setValueSort } = filter.actions;
+export const { setFilter, setSort, setSearch, setValueSort, setOpen } =
+  filter.actions;
 export default filter.reducer;

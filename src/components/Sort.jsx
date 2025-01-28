@@ -1,25 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 import qs from "qs";
+
+import { useDispatch, useSelector } from "react-redux";
+import { setOpen } from "../redux/slices/filterSlice";
+
 export const nameCategory = [
   { name: "популярности", sortProperty: "rating" },
   { name: "цене", sortProperty: "price" },
   { name: "алфавиту", sortProperty: "name" },
 ];
 
-export function Sort({
-  value,
-  onChangeCart,
-  isOpen,
-  setIsOpen,
-  valueSort,
-  onChangeValueSort,
-}) {
+export function Sort({ value, onChangeCart, valueSort, onChangeValueSort }) {
   const sortPopup = useRef();
+  const dispatch = useDispatch();
+  const isOpen = useSelector((state) => state.filter.isOpen);
 
   useEffect(() => {
     const clickOutside = (event) => {
       if (!event.composedPath().includes(sortPopup.current)) {
-        setIsOpen(false);
+        dispatch(setOpen(isOpen === true && false));
       }
     };
 
@@ -31,7 +30,7 @@ export function Sort({
 
   const handleClick = (index) => {
     onChangeCart(index);
-    setIsOpen(false);
+    dispatch(setOpen(isOpen === true && false));
   };
   const handleClickValue = (value) => {
     onChangeValueSort(value);
@@ -47,7 +46,7 @@ export function Sort({
           <span></span>
         </div>
         <b>Сортировка по:</b>
-        <span onClick={() => setIsOpen(!isOpen)}>{value.name}</span>
+        <span onClick={() => dispatch(setOpen(!isOpen))}>{value.name}</span>
       </div>
       {isOpen && (
         <div className="sort__popup">
