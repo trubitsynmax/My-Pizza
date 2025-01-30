@@ -32,6 +32,8 @@ export default function Home() {
   const valueSort = useSelector((state) => state.filter.MoreOrLess);
   const status = useSelector((state) => state.pizza.status);
   const data = useSelector((state) => state.pizza.items);
+  const usersValue = useSelector((state) => state.filter.inputValue);
+  console.log(usersValue);
 
   const onChangeCategory = (id) => {
     dispatch(setFilter(id));
@@ -42,7 +44,6 @@ export default function Home() {
   const onChangeValueSort = (value) => {
     dispatch(setValueSort(value));
   };
-  const { usersValue } = useContext(searchContext);
 
   useEffect(() => {
     if (window.location.search) {
@@ -120,19 +121,3 @@ export default function Home() {
     </>
   );
 }
-
-// setIsLoading(true);
-// setError(false);
-// axios
-//   .get(
-//     `https://6766d6fd560fbd14f18c43df.mockapi.io/MyPizza?${isCategory}&${isSort}&order=${isFilter}`
-//   )
-//   .then((res) => {
-//     setData(res.data);
-//     setIsLoading(false);
-//   })
-//   .catch(() => {
-//     setError(true);
-//     setIsLoading(false);
-//   });
-// isSearch.current = false;

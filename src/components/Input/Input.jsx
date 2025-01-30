@@ -2,22 +2,24 @@ import { useCallback, useContext, useRef, useState } from "react";
 import styles from "./Input.module.scss";
 import { searchContext } from "../../App";
 import debounce from "lodash.debounce";
+import { useDispatch, useSelector } from "react-redux";
+import { setValueInput } from "../../redux/slices/filterSlice";
 
 export default function Input() {
+  const dispatch = useDispatch();
   const [value, setValue] = useState("");
-  const { usersValue, setUsersValue } = useContext(searchContext);
   const inputRef = useRef();
 
   const focusInput = () => {
     setValue("");
-    setUsersValue("");
+    dispatch(setValueInput(""));
     inputRef.current.focus();
   };
 
   const getInput = useCallback(
     debounce((str) => {
-      setUsersValue(str);
-    }, 1000),
+      dispatch(setValueInput(str));
+    }, 500),
     []
   );
 
