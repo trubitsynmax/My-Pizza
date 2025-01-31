@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import CartItem from "../components/CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { cart } from "../redux/slices/cartSlice";
@@ -9,6 +9,7 @@ import { useState } from "react";
 export default function Subcart() {
   const cartItems = useSelector((state) => state.cart.item);
   const totalPrice = cartItems.map((i) => i.count);
+
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(removeBasket(cartItems));

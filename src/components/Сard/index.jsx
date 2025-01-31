@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { addItem, minusItem } from "../../redux/slices/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router";
 
 export function Card({ name, price, sizes, types, imageUrl, id }) {
   const dispatch = useDispatch();
@@ -28,7 +29,11 @@ export function Card({ name, price, sizes, types, imageUrl, id }) {
   };
   return (
     <div className="pizza-block">
-      <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+      {
+        <Link to={`/pizza/${id}`}>
+          <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+        </Link>
+      }
       <h4 className="pizza-block__title">{name}</h4>
       <div className="pizza-block__selector">
         <ul>

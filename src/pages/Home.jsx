@@ -9,7 +9,7 @@ import {
   setValueSort,
 } from "../redux/slices/filterSlice";
 import qs from "qs";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { nameCategory } from "../components/Sort";
 import { fetchPizzaItems } from "../redux/slices/pizzaSlice";
 
@@ -33,7 +33,6 @@ export default function Home() {
   const status = useSelector((state) => state.pizza.status);
   const data = useSelector((state) => state.pizza.items);
   const usersValue = useSelector((state) => state.filter.inputValue);
-  console.log(usersValue);
 
   const onChangeCategory = (id) => {
     dispatch(setFilter(id));

@@ -68,14 +68,6 @@ export const cart = createSlice({
           obj.size !== action.payload.size
       );
     },
-    niceDay(state, action) {
-      const fun = true;
-      if (fun === true) {
-        const mood = "lisen music";
-      } else {
-        const mood = "don't";
-      }
-    },
   },
 });
 
