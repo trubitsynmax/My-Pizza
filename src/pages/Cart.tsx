@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import CartItem from "../components/CartItem";
 import { removeBasket } from "../redux/slices/cartSlice";
 import CartEmpty from "./CartEmpty";

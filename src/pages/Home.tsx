@@ -7,7 +7,7 @@ import {
   setValueSort,
 } from "../redux/slices/filterSlice";
 import qs from "qs";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { nameCategory } from "../components/Sort";
 import { fetchPizzaItems } from "../redux/slices/pizzaSlice";
 import { useAppDispatch, useAppSelector } from "../redux/store";
