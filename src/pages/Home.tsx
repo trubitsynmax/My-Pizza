@@ -37,15 +37,15 @@ const Home: React.FC = () => {
     sortProperty: string;
   };
 
-  const onChangeCategory = (id: number) => {
+  const onChangeCategory = React.useCallback((id: number) => {
     dispatch(setFilter(id));
-  };
-  const onChangeCart = (id: INameCategory) => {
+  }, []);
+  const onChangeCart = React.useCallback((id: INameCategory) => {
     dispatch(setSort(id));
-  };
-  const onChangeValueSort = (value: boolean) => {
+  }, []);
+  const onChangeValueSort = React.useCallback((value: boolean) => {
     dispatch(setValueSort(value));
-  };
+  }, []);
 
   useEffect(() => {
     if (window.location.search) {
