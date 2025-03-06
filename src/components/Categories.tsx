@@ -1,6 +1,14 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-export function Categories({ value, onChangeCategory }) {
+type CategoriesProps = {
+  value: number;
+  onChangeCategory: (idx: number) => void;
+};
+
+export const Categories: React.FC<CategoriesProps> = ({
+  value,
+  onChangeCategory,
+}) => {
   const categories = [
     { name: "Все", id: 0 },
     { name: "Мясные", id: 1 },
@@ -9,12 +17,12 @@ export function Categories({ value, onChangeCategory }) {
     { name: "Острые", id: 4 },
     { name: "Закрытые", id: 5 },
   ];
-  const [openCategories, setOpenCategories] = useState(false);
-  const handleClick = (index) => {
+  const [openCategories, setOpenCategories] = useState<boolean>(false);
+  const handleClick = (index: number) => {
     onChangeCategory(index);
     setOpenCategories(false);
   };
-  const widthWindow = window.innerWidth;
+  const widthWindow: number = window.innerWidth;
 
   return (
     <div className="categories">
@@ -26,12 +34,12 @@ export function Categories({ value, onChangeCategory }) {
           </span>
         </div>
       )}
-      <ul className={openCategories ? "active" : null}>
-        {categories.map((item, index) => (
+      <ul className={openCategories ? "active" : ""}>
+        {categories.map((item: { name: string; id: number }, index: number) => (
           <li
             onClick={() => handleClick(index)}
             key={item.id}
-            className={value === index ? "active" : null}
+            className={value === index ? "active" : ""}
           >
             {item.name}
           </li>
@@ -39,4 +47,4 @@ export function Categories({ value, onChangeCategory }) {
       </ul>
     </div>
   );
-}
+};

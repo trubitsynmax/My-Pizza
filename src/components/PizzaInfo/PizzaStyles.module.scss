@@ -1,0 +1,79 @@
+.pizza {
+  margin: 0 auto;
+  max-width: 650px;
+  font-size: 19px;
+  &__image {
+    width: 60%;
+    display: flex;
+    margin: 0 auto 25px;
+  }
+  &__title {
+    text-align: center;
+    margin: 0 0 10px 0;
+    font-size: 38px;
+  }
+  &__price {
+    font-style: italic;
+    text-align: center;
+  }
+  &__rating {
+    font-style: italic;
+    text-align: center;
+    margin: 0 0 15px 0;
+  }
+  &__body {
+    border: 2px solid #fddf84ff;
+    padding: 15px;
+    border-radius: 15px;
+    span {
+      font-weight: bold;
+    }
+    p {
+      margin: 0 0 5px 0;
+      padding: 0 0 5px 0;
+      &:last-child {
+        margin: 0 0 0 15px;
+        font-style: italic;
+      }
+    }
+  }
+  &__wrapper {
+    margin: 0 0 25px 0;
+  }
+  &__btn {
+    background-color: #ff5f4dff;
+    color: #fff;
+    display: block;
+    text-align: center;
+    max-width: 200px;
+    margin: 0 auto;
+    padding: 5px 20px;
+    border: none;
+    font-size: 22px;
+    border-radius: 25px;
+  }
+}
+.pending {
+  max-width: 800px;
+  margin: 50px auto;
+  p {
+    font-size: 22px;
+    text-align: center;
+    margin: 0 0 85px 0;
+  }
+  img {
+    display: block;
+    max-width: 100px;
+    max-height: 100px;
+    margin: 0 auto;
+  }
+}
+.error {
+  margin: 70px;
+  p {
+    max-width: 650px;
+    margin: 0 auto 95px;
+    text-align: center;
+    font-size: 24px;
+  }
+}

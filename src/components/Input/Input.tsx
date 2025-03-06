@@ -1,27 +1,28 @@
-import { useCallback, useContext, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import styles from "./Input.module.scss";
-import { searchContext } from "../../App";
 import debounce from "lodash.debounce";
+import { useDispatch } from "react-redux";
+import { setValueInput } from "../../redux/slices/filterSlice";
 
-export default function Input() {
-  const [value, setValue] = useState("");
-  const { usersValue, setUsersValue } = useContext(searchContext);
-  const inputRef = useRef();
+const Input: React.FC = () => {
+  const dispatch = useDispatch();
+  const [value, setValue] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const focusInput = () => {
     setValue("");
-    setUsersValue("");
-    inputRef.current.focus();
+    dispatch(setValueInput(""));
+    inputRef.current?.focus();
   };
 
   const getInput = useCallback(
-    debounce((str) => {
-      setUsersValue(str);
-    }, 1000),
+    debounce((str: string) => {
+      dispatch(setValueInput(str));
+    }, 500),
     []
   );
 
-  const eventInput = (event) => {
+  const eventInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
     getInput(event.target.value);
   };
@@ -39,4 +40,6 @@ export default function Input() {
       {value && <div className={styles.cross} onClick={focusInput}></div>}
     </div>
   );
-}
+};
+
+export default Input;

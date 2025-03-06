@@ -1,16 +1,17 @@
 import { Link } from "react-router";
 import CartItem from "../components/CartItem";
-import { useDispatch, useSelector } from "react-redux";
-import { cart } from "../redux/slices/cartSlice";
 import { removeBasket } from "../redux/slices/cartSlice";
 import CartEmpty from "./CartEmpty";
+import React from "react";
+import { useAppDispatch, useAppSelector } from "../redux/store";
 
-export default function Subcart() {
-  const cartItems = useSelector((state) => state.cart.item);
-  const totalPrice = cartItems.map((i) => i.count);
-  const dispatch = useDispatch();
+const Subcart: React.FC = () => {
+  const cartItems = useAppSelector((state) => state.cart.item);
+  const totalPrice = cartItems.map((sum) => sum.count, 0);
+
+  const dispatch = useAppDispatch();
   const handleClick = () => {
-    dispatch(removeBasket(cartItems));
+    dispatch(removeBasket());
   };
   if (cartItems.length < 1) {
     return <CartEmpty />;
@@ -94,21 +95,27 @@ export default function Subcart() {
           </div>
         </div>
         <div className="content__items">
-          {cartItems.map((item) => (
-            <CartItem key={item.id + item.size + item.type} {...item} />
+          {cartItems.map((item, index) => (
+            <CartItem key={index++} {...item} />
           ))}
         </div>
         <div className="cart__bottom">
           <div className="cart__bottom-details">
             <span>
               Всего пицц:
-              <b>{totalPrice.reduce((sum, number) => sum + number, 0)} шт.</b>
+              <b>
+                {totalPrice.reduce(
+                  (sum: number, number: number) => sum + number,
+                  0
+                )}{" "}
+                шт.
+              </b>
             </span>
             <span>
               Сумма заказа:
               <b>
                 {cartItems.reduce(
-                  (sum, item) => item.count * item.price + sum,
+                  (sum: number, item) => item.count * item.price + sum,
                   0
                 )}
                 ₽
@@ -146,4 +153,6 @@ export default function Subcart() {
       </div>
     </div>
   );
-}
+};
+
+export default Subcart;

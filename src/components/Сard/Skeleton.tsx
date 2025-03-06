@@ -1,7 +1,7 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 
-export const Skeleton = (props) => (
+export const Skeleton: React.FC = () => (
   <ContentLoader
     speed={2}
     width={280}
@@ -9,7 +9,6 @@ export const Skeleton = (props) => (
     viewBox="0 0 280 450"
     backgroundColor="#f3f3f3"
     foregroundColor="#ecebeb"
-    {...props}
   >
     <circle cx="147" cy="96" r="90" />
     <rect x="-2" y="199" rx="10" ry="10" width="280" height="24" />

@@ -1,22 +1,32 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+type INameCategory = {
+  name: string;
+  sortProperty: string;
+};
 
 const initialState = {
   categoryId: 0,
   MoreOrLess: true,
+  inputValue: "",
   sort: {
     name: "популярности",
     sortProperty: "rating",
   },
+  isOpen: false,
 };
 
 export const filter = createSlice({
   name: "filter",
   initialState,
   reducers: {
+    setValueInput(state, action) {
+      state.inputValue = action.payload;
+    },
     setFilter(state, action) {
       state.categoryId = action.payload;
     },
-    setSort(state, action) {
+    setSort(state, action: PayloadAction<INameCategory>) {
       state.sort = action.payload;
     },
     setValueSort(state, action) {
@@ -27,8 +37,18 @@ export const filter = createSlice({
       state.MoreOrLess = action.payload.valueSort;
       state.sort = action.payload.sort;
     },
+    setOpen(state, action) {
+      state.isOpen = action.payload;
+    },
   },
 });
 
-export const { setFilter, setSort, setSearch, setValueSort } = filter.actions;
+export const {
+  setFilter,
+  setSort,
+  setSearch,
+  setValueSort,
+  setOpen,
+  setValueInput,
+} = filter.actions;
 export default filter.reducer;

@@ -1,6 +1,8 @@
+import React from "react";
 import styles from "./NotFoundBlock.module.scss";
 import { Link } from "react-router";
-export default function NotFoundBlock() {
+
+export const NotFoundBlock: React.FC = () => {
   return (
     <div className={styles.block}>
       <h2 className={styles.subtitle}>
@@ -12,4 +14,6 @@ export default function NotFoundBlock() {
       </Link>
     </div>
   );
-}
+};
+
+export default NotFoundBlock;

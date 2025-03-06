@@ -1,10 +1,37 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { addItem, minusItem } from "../../redux/slices/cartSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
 
-export function Card({ name, price, sizes, types, imageUrl, id }) {
-  const dispatch = useDispatch();
-  const item = useSelector((state) =>
+type TItem = {
+  id: string;
+  imageUrl: string;
+  name: string;
+  types: number[];
+  sizes: number[];
+  price: number;
+  category?: number[];
+  rating: number;
+  info: {
+    caloric: string;
+    proteins: string;
+    fats: string;
+    carbohydrates: string;
+    dietaryFiber: string;
+    water: string;
+    compound: string[];
+  }[];
+};
+export const Card: React.FC<TItem> = ({
+  name,
+  price,
+  sizes,
+  types,
+  imageUrl,
+  id,
+}) => {
+  const dispatch = useAppDispatch();
+  const item = useAppSelector((state) =>
     state.cart.item.filter((obj) => obj.id == id)
   );
   const totalPrice = item.map((i) => i.count);
@@ -28,11 +55,15 @@ export function Card({ name, price, sizes, types, imageUrl, id }) {
   };
   return (
     <div className="pizza-block">
-      <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+      {
+        <Link to={`/pizza/${id}`}>
+          <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+        </Link>
+      }
       <h4 className="pizza-block__title">{name}</h4>
       <div className="pizza-block__selector">
         <ul>
-          {types.map((item) => (
+          {types.map((item: number) => (
             <li
               className={type == item ? "active" : ""}
               key={item}
@@ -43,7 +74,7 @@ export function Card({ name, price, sizes, types, imageUrl, id }) {
           ))}
         </ul>
         <ul>
-          {sizes.map((item, index) => (
+          {sizes.map((item: number, index: number) => (
             <li
               className={sizePizza == index ? "active" : ""}
               key={item}
@@ -85,7 +116,10 @@ export function Card({ name, price, sizes, types, imageUrl, id }) {
                 <span></span>
               </div>
               <div className="pizza-block__count" onClick={() => handleClick()}>
-                {totalPrice.reduce((sum, number) => sum + number, 0)}
+                {totalPrice.reduce(
+                  (sum: number, number: number) => sum + number,
+                  0
+                )}
               </div>
               <div className="pizza-block__more" onClick={() => handleClick()}>
                 <span></span>
@@ -96,4 +130,4 @@ export function Card({ name, price, sizes, types, imageUrl, id }) {
       </div>
     </div>
   );
-}
+};
