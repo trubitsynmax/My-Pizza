@@ -1,32 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
-
-type TItemAdd = {
-  id: string;
-  name: string;
-  imageUrl: string;
-  price: number;
-  type: string;
-  size: number;
-  count?: number;
-};
-type CartItem = TItemAdd & { count: number };
-type TItemMinus = {
-  id: string;
-  size: number;
-  type: string;
-};
-
-interface IState {
-  totalPrice: number;
-  maxLength: number;
-  item: CartItem[];
-}
+import { IState, TItemAdd, TItemMinus } from "./type";
+import { getItemsFS } from "../../utils/getItemFS";
 
 const initialState: IState = {
   totalPrice: 0,
   maxLength: 0,
-  item: [],
+  item: getItemsFS(),
 };
 
 export const cart = createSlice({

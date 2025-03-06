@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from "react";
 import styles from "./Input.module.scss";
 import debounce from "lodash.debounce";
 import { useDispatch } from "react-redux";
-import { setValueInput } from "../../redux/slices/filterSlice";
+import { setValueInput } from "../../redux/slices/filter/filterSlice";
 
 const Input: React.FC = () => {
   const dispatch = useDispatch();

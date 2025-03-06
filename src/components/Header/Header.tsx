@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router";
-import logo from "../assets/img/pizza-logo.svg";
-import Input from "./Input/Input";
+import logo from "../../assets/img/pizza-logo.svg";
+import Input from "../Input/Input";
 import React from "react";
-import { useAppSelector } from "../redux/store";
+import { useAppSelector } from "../../redux/store";
 
 export const Header: React.FC = () => {
   const price = useAppSelector((state) => state.cart.totalPrice);

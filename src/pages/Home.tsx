@@ -5,12 +5,17 @@ import {
   setSort,
   setSearch,
   setValueSort,
-} from "../redux/slices/filterSlice";
+} from "../redux/slices/filter/filterSlice";
 import qs from "qs";
-import { useLocation, useNavigate } from "react-router";
-import { nameCategory } from "../components/Sort";
-import { fetchPizzaItems } from "../redux/slices/pizzaSlice";
+import { useNavigate } from "react-router";
+import { nameCategory } from "../components/Sort/Sort";
+import { fetchPizzaItems } from "../redux/utils/asyncAction/fetchAction";
 import { useAppDispatch, useAppSelector } from "../redux/store";
+
+type INameCategory = {
+  name: string;
+  sortProperty: string;
+};
 
 const Home: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -31,11 +36,14 @@ const Home: React.FC = () => {
   const status = useAppSelector((state) => state.pizza.status);
   const data = useAppSelector((state) => state.pizza.items);
   const usersValue = useAppSelector((state) => state.filter.inputValue);
+  const cartItem = useAppSelector((state) => state.cart.item);
 
-  type INameCategory = {
-    name: string;
-    sortProperty: string;
-  };
+  useEffect(() => {
+    if (cartItem.length > 0) {
+      const json = JSON.stringify(cartItem);
+      localStorage.setItem("items", json);
+    }
+  }, [cartItem]);
 
   const onChangeCategory = React.useCallback((id: number) => {
     dispatch(setFilter(id));

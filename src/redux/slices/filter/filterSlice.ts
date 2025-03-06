@@ -1,9 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-type INameCategory = {
-  name: string;
-  sortProperty: string;
-};
+import { INameCategory } from "./type";
 
 const initialState = {
   categoryId: 0,

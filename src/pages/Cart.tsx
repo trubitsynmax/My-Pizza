@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router";
-import CartItem from "../components/CartItem";
-import { removeBasket } from "../redux/slices/cartSlice";
+import CartItem from "../components/CartItem/CartItem";
+import { removeBasket } from "../redux/slices/cart/cartSlice";
 import CartEmpty from "./CartEmpty";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../redux/store";

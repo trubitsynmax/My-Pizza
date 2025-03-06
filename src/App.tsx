@@ -1,5 +1,5 @@
 import "./scss/app.scss";
-import { Header } from "./components/script";
+import { Header } from "./components/Header/Header";
 import Home from "./pages/Home";
 import { Routes, Route } from "react-router";
 import NotFound from "./pages/NotFound";

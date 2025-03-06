@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router";
-import { fetchOnePizza } from "../../redux/slices/additionallySlice";
-import { useSelector } from "react-redux";
+import { fetchOnePizza } from "../../redux/slices/additionally/additionallySlice";
 import styles from "./PizzaStyles.module.scss";
 import image from "../../assets/img/pending.gif";
 import { useAppDispatch, useAppSelector } from "../../redux/store";

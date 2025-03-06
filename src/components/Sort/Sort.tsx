@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setOpen } from "../redux/slices/filterSlice";
-import { useAppSelector } from "../redux/store";
+import { setOpen } from "../../redux/slices/filter/filterSlice";
+import { useAppSelector } from "../../redux/store";
 
 type INameCategory = {
   name: string;
