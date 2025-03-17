@@ -7,7 +7,7 @@ export const fetchPizzaItems = createAsyncThunk(
   async (params: ValueLink) => {
     const { isCategory, isFilter, isSort } = params;
     const { data } = await axios.get(
-      `https://6766d6fd560fbd14f18c43df.mockapi.io/MyPizza?${isCategory}&${isSort}&order=${isFilter}`
+      `https://67d43e67d2c7857431ecfd6a.mockapi.io/Pizzac?${isCategory}&${isSort}&order=${isFilter}`
     );
     return data;
   }
